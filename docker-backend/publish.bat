@@ -1,7 +1,7 @@
 cd ..
 echo "Deleting old jar files"
-del .\build\libs\OcppSmartHome.jar
-del .\docker-backend\OcppSmartHome.jar
+del .\build\libs\SmartHome.jar
+del .\docker-backend\SmartHome.jar
 
 echo "-- LINTING --"
 echo "ktlint Format"
@@ -16,7 +16,7 @@ echo "-- BUILDING JAR --"
 echo "Gradle build without tests. Run tests manually if required
 call .\gradlew build -x test
 echo "Copying jar file"
-copy .\build\libs\OcppSmartHome.jar .\docker-backend\OcppSmartHome.jar
+copy .\build\libs\SmartHome.jar .\docker-backend\SmartHome.jar
 
 echo "-- DEPLOYMENT --"
 cd .\docker-backend
