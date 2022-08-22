@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class AuthorizationService @Autowired constructor(
     private val clientRequestService: IClientRequestService
-): IAuthorizationService {
+) : IAuthorizationService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 

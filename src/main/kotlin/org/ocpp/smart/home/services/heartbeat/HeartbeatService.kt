@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class HeartbeatService @Autowired constructor(
     private val clientRequestService: IClientRequestService
-): IHeartbeatService {
+) : IHeartbeatService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 

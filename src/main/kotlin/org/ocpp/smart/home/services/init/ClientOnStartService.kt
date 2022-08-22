@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class ClientOnStartService @Autowired constructor(
     private val clientInitService: IClientInitService,
     private val applicationEventPublisher: ApplicationEventPublisher,
-): IClientOnStartService {
+) : IClientOnStartService {
 
     @Value("\${ocpp.ip.address}")
     lateinit var ipAddress: String
