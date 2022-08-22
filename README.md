@@ -1,11 +1,12 @@
 # Smart Home Simulator
 
 ## About this application
-
+This application simulates a simple smart home to verify the communication between a battery controller and a server
+application. This application is currently able to register, authorize and bi-directional communication with a server.
 
 ## Docker
 Dockerfiles can be found for backend in directory <b>docker-backend</b>, for frontend at
-<b>src\main\kotlin\org\ocpp\server\frontend</b>.
+<b>src\main\kotlin\org\ocpp\smart\home\frontend</b>.
 
 Docker compose file can be found in directory <b>docker-backend</b>.
 
@@ -14,7 +15,7 @@ In order to run the database, backend and frontend via the compose file run the 
 <ol>
     <li>Go to folder <b>docker-backend</b></li>
     <li>Run the file <b>publish.bat</b> in the terminal. This builds the required jar file for docker</li>
-    <li>Run command <b>docker build -t org.ocpp.server:1.0.0 .</b></li>
+    <li>Run command <b>docker build -t org.ocpp.smart.home:1.0.0 .</b></li>
     <li>Run command <b>docker-compose up</b></li>
     <li>Wait until all services has been loaded. Frontend service takes usually the longest (1 or 2 minutes).</li>
     <li>Open the browser and access the application via <b>http://localhost:4200</b></li>
@@ -31,9 +32,9 @@ or just change the port in the compose file (take care that the app uses then th
     <li>Install a SQL database (MySQL recommended)</li>
     <li>Add a database user with username <b>user</b> and password <b>password</b></li>
     <li>Start the database on your local machine on port 3306 (default port)</li>
-    <li>Create the database <b>ocppServer</b> manually. Tables will be created automatically by the application.</li>
+    <li>Create the database <b>ocppSmartHome</b> manually. Tables will be created automatically by the application.</li>
     <li>If you use MySQL, search and open the <b>MySQL Command Line Client</b>. Login with password <b>root</b> and
-    enter <b>create database ocppServer</b>. Click <b>Enter</b>.</li>
+    enter <b>create database ocppSmartHome</b>. Click <b>Enter</b>.</li>
 </ol>
 
 ### Backend Pre-Requisites
@@ -48,7 +49,7 @@ or just change the port in the compose file (take care that the app uses then th
 <ol>
     <li>Install NodeJs and NPM via <b>https://nodejs.org/en/download/</b></li>
     <li>Install Angular CLI. Run the command <b>npm install -g @angular/cli</b> in your console</li>
-    <li>Go to <b>src\main\kotlin\org\ocpp\server\frontend</b></li>
+    <li>Go to <b>src\main\kotlin\org\ocpp\smart\home\frontend</b></li>
     <li>Open the terminal</li>
     <li>Run command <b>npm i --save</b> to load all dependencies</li>
 </ol>
@@ -59,7 +60,7 @@ has been created. The tables will be created by the Spring Application at startu
 
 ## Run Frontend Application
 <ol>
-    <li>Go to <b>src\main\kotlin\org\ocpp\server\frontend</b></li>
+    <li>Go to <b>src\main\kotlin\org\ocpp\smart\home\frontend</b></li>
     <li>Open the terminal</li>
     <li>Run command <b>ng serve</b></li>
 </ol>
@@ -97,6 +98,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ## Literature
 <ul>
     <li>https://github.com/NLCProject/OcppClient</li>
+    <li>https://github.com/NLCProject/OcppServer</li>
     <li>https://github.com/NLCProject/BatteryController</li>
     <li>https://github.com/ChargeTimeEU/Java-OCA-OCPP/wiki</li>
     <li>https://github.com/ChargeTimeEU/Java-OCA-OCPP/wiki/Getting-started</li>
