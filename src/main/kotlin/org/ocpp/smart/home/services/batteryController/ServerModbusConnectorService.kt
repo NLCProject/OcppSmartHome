@@ -22,7 +22,7 @@ class ServerModbusConnectorService @Autowired constructor(
     override fun sendAvailableCommandsOnInit() {
         logger.info("Sending available modbus commands to server on init")
         val dto = ModbusOnInit(
-            manufacturer = batteryControllerService.manufacturer,
+            manufacturer = batteryControllerService.getManufacturerEnum(),
             availableCommands = batteryControllerService.getAllAvailableCommand()
         )
 

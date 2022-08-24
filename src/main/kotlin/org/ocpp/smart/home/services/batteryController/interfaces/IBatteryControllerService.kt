@@ -14,11 +14,6 @@ interface IBatteryControllerService {
     /**
      *
      */
-    var manufacturer: Manufacturer
-
-    /**
-     *
-     */
     @EventListener(ApplicationReadyEvent::class)
     fun authorize()
 
@@ -31,4 +26,9 @@ interface IBatteryControllerService {
      *
      */
     fun sendCommand(request: ModbusRequest)
+
+    /**
+     *
+     */
+    fun getManufacturerEnum(): Manufacturer
 }

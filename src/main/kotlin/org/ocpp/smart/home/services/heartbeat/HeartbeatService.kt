@@ -16,7 +16,7 @@ class HeartbeatService @Autowired constructor(
 
     @Scheduled(fixedRate = 5_000, initialDelay = 5_000)
     override fun sendHeartbeat() {
-        logger.info("Sending heartbeat")
+        logger.trace("Sending heartbeat")
         clientRequestService.heartbeat()
     }
 }

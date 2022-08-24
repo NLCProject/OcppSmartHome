@@ -15,14 +15,14 @@ class BatteryControllerService @Autowired constructor(
     private val smartHomeConnector: ISmartHomeConnector
 ): IBatteryControllerService {
 
-    @Value("\${ocpp.battery.manufacturer}")
-    override lateinit var manufacturer: Manufacturer
+    @Value("\${occp.battery.manufacturer}")
+    lateinit var manufacturer: String
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun authorize() {
         logger.info("Registering smart home with battery controller '$manufacturer'")
-        smartHomeConnector.registerManufacturer(manufacturer = manufacturer)
+        smartHomeConnector.registerManufacturer(manufacturer = getManufacturerEnum())
     }
 
     override fun getAllAvailableCommand(): List<ModbusCommand> {
@@ -33,5 +33,12 @@ class BatteryControllerService @Autowired constructor(
     override fun sendCommand(request: ModbusRequest) {
         logger.info("Sending modbus request '${request.command}' with value '${request.value}'")
         smartHomeConnector.sendCommand(request = request)
+    }
+
+    override fun getManufacturerEnum(): Manufacturer {
+        if (manufacturer.isEmpty())
+            throw Exception("No manufacturer defined in application.properties")
+
+        return Manufacturer.valueOf(manufacturer)
     }
 }
