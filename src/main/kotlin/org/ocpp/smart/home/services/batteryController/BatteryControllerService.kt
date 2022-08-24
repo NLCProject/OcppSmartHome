@@ -1,23 +1,37 @@
 package org.ocpp.smart.home.services.batteryController
 
-import org.ocpp.smart.home.services.batteryController.interfaces.IBatteryControllerInitService
+import org.battery.controller.util.controller.modbusSimulator.ModbusCommand
+import org.battery.controller.util.controller.modbusSimulator.commands.ModbusRequest
+import org.battery.controller.util.controller.smartHomeConnector.ISmartHomeConnector
+import org.battery.controller.util.manufacturers.enums.Manufacturer
+import org.ocpp.smart.home.services.batteryController.interfaces.IBatteryControllerService
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
-class BatteryControllerService: IBatteryControllerInitService {
+class BatteryControllerService @Autowired constructor(
+    private val smartHomeConnector: ISmartHomeConnector
+): IBatteryControllerService {
 
     @Value("\${ocpp.battery.manufacturer}")
-    lateinit var manufacturer: String
+    override lateinit var manufacturer: Manufacturer
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun authorize() {
-        if (manufacturer.isEmpty())
-            return logger.warn("No battery controller defined")
-
         logger.info("Registering smart home with battery controller '$manufacturer'")
-        // TODO
+        smartHomeConnector.registerManufacturer(manufacturer = manufacturer)
+    }
+
+    override fun getAllAvailableCommand(): List<ModbusCommand> {
+        logger.info("Requesting available modbus commands")
+        return smartHomeConnector.getAllAvailableCommand()
+    }
+
+    override fun sendCommand(request: ModbusRequest) {
+        logger.info("Sending modbus request '${request.command}' with value '${request.value}'")
+        smartHomeConnector.sendCommand(request = request)
     }
 }
