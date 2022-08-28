@@ -18,7 +18,7 @@ class AuthorizationService @Autowired constructor(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun authorize() {
-        logger.info("Authorizing client")
+        logger.info("Authorizing client with ID tag '${SmartHomeConfiguration.idTag}")
         clientRequestService.authorize(idTag = SmartHomeConfiguration.idTag)
         applicationEventPublisher.publishEvent(ClientAuthorizedEvent(source = this))
     }

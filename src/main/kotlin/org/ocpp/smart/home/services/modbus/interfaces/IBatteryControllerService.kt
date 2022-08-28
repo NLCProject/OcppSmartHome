@@ -1,4 +1,4 @@
-package org.ocpp.smart.home.services.batteryController.interfaces
+package org.ocpp.smart.home.services.modbus.interfaces
 
 import org.battery.controller.util.controller.modbusSimulator.ModbusCommand
 import org.battery.controller.util.controller.modbusSimulator.commands.ModbusRequest

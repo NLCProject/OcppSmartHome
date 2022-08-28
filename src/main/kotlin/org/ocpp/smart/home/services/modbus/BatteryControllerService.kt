@@ -1,10 +1,11 @@
-package org.ocpp.smart.home.services.batteryController
+package org.ocpp.smart.home.services.modbus
 
 import org.battery.controller.util.controller.modbusSimulator.ModbusCommand
 import org.battery.controller.util.controller.modbusSimulator.commands.ModbusRequest
 import org.battery.controller.util.controller.smartHomeConnector.ISmartHomeConnector
 import org.battery.controller.util.manufacturers.enums.Manufacturer
-import org.ocpp.smart.home.services.batteryController.interfaces.IBatteryControllerService
+import org.ocpp.smart.home.configuration.SmartHomeConfiguration
+import org.ocpp.smart.home.services.modbus.interfaces.IBatteryControllerService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -22,7 +23,10 @@ class BatteryControllerService @Autowired constructor(
 
     override fun authorize() {
         logger.info("Registering smart home with battery controller '$manufacturer'")
-        smartHomeConnector.registerManufacturer(manufacturer = getManufacturerEnum())
+        smartHomeConnector.registerManufacturer(
+            manufacturer = getManufacturerEnum(),
+            idTag = SmartHomeConfiguration.idTag
+        )
     }
 
     override fun getAllAvailableCommand(): List<ModbusCommand> {

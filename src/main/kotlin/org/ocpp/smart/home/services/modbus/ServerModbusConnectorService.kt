@@ -1,12 +1,12 @@
-package org.ocpp.smart.home.services.batteryController
+package org.ocpp.smart.home.services.modbus
 
 import org.battery.controller.util.controller.modbusSimulator.commands.ModbusOnInit
 import org.isc.utils.serialization.JsonSerialization
 import org.ocpp.client.client.interfaces.IClientRequestService
 import org.ocpp.smart.home.configuration.SmartHomeConfiguration
 import org.ocpp.smart.home.exceptions.TypeUuidNotDefinedException
-import org.ocpp.smart.home.services.batteryController.interfaces.IBatteryControllerService
-import org.ocpp.smart.home.services.batteryController.interfaces.IServerModbusConnectorService
+import org.ocpp.smart.home.services.modbus.interfaces.IBatteryControllerService
+import org.ocpp.smart.home.services.modbus.interfaces.IServerModbusConnectorService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -22,6 +22,7 @@ class ServerModbusConnectorService @Autowired constructor(
     override fun sendAvailableCommandsOnInit() {
         logger.info("Sending available modbus commands to server on init")
         val dto = ModbusOnInit(
+            idTag = SmartHomeConfiguration.idTag,
             manufacturer = batteryControllerService.getManufacturerEnum(),
             availableCommands = batteryControllerService.getAllAvailableCommand()
         )
