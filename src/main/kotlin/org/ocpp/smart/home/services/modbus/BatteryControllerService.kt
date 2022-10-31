@@ -2,6 +2,7 @@ package org.ocpp.smart.home.services.modbus
 
 import org.battery.controller.util.controller.modbusSimulator.ModbusCommand
 import org.battery.controller.util.controller.modbusSimulator.commands.ModbusRequest
+import org.battery.controller.util.controller.modbusSimulator.commands.ModbusResponse
 import org.battery.controller.util.controller.smartHomeConnector.ISmartHomeConnector
 import org.battery.controller.util.manufacturers.enums.Manufacturer
 import org.ocpp.smart.home.configuration.SmartHomeConfiguration
@@ -34,9 +35,9 @@ class BatteryControllerService @Autowired constructor(
         return smartHomeConnector.getAllAvailableCommand()
     }
 
-    override fun sendCommand(request: ModbusRequest) {
+    override fun sendCommand(request: ModbusRequest): ModbusResponse {
         logger.info("Sending modbus request '${request.command}' with value '${request.value}'")
-        smartHomeConnector.sendCommand(request = request)
+        return smartHomeConnector.sendCommand(request = request)
     }
 
     override fun getManufacturerEnum(): Manufacturer {

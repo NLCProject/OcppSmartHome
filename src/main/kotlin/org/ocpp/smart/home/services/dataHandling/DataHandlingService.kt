@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class DataHandlingService @Autowired constructor(
-    private val batterController: IBatteryControllerService
+    private val batteryController: IBatteryControllerService
 ): IDataHandlingService, JsonSerialization() {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
@@ -27,7 +27,7 @@ class DataHandlingService @Autowired constructor(
         when {
             data.contains(CommandUUID.modbusRequest) -> {
                 val request = super.decode<ModbusRequest>(data = data)
-                batterController.sendCommand(request = request)
+                val response = batteryController.sendCommand(request = request)
             }
 
             else -> throw Exception("Unknown or not defined UUID in received data | $data")
