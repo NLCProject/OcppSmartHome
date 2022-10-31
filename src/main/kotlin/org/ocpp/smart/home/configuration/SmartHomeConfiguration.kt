@@ -10,7 +10,7 @@ object SmartHomeConfiguration {
     /**
      *
      */
-    val idTag: String = Ids.getRandomId()
+    val idTag: String = Ids.getRandomIdentifier().toString()
 
     /**
      *

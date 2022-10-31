@@ -21,6 +21,8 @@ class ServerModbusConnectorService @Autowired constructor(
 
     override fun sendAvailableCommandsOnInit() {
         logger.info("Sending available modbus commands to server on init")
+        batteryControllerService.authorize()
+
         val dto = ModbusOnInit(
             idTag = SmartHomeConfiguration.idTag,
             manufacturer = batteryControllerService.getManufacturerEnum(),
