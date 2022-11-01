@@ -4,7 +4,7 @@ import org.ocpp.client.event.client.request.ClientDataTransferRequestEvent
 import org.springframework.context.event.EventListener
 
 /**
- *
+ * Data handling service.
  */
 interface IDataHandlingService {
 
